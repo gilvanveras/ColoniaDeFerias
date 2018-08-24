@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content-wrapper %}
+{% if user.is_authenticated %}
+<!-- Example DataTables Card-->
+        <div class="card mb-3">
+                <div class="card-header">
+                  <i class="fa fa-table"></i> Tabela de Reservas</div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>                
+                        <tr>
+                        	<th>Associado</th>
+                            <th>Data de Agendamento</th>
+                            <th>Data de Entrada</th>
+                            <th>Data de Saída</th>
+                            <th>Ambiente</th>
+                            <th>Necessidade Especial</th>  
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Associado</th>
+                            <th>Data de Agendamento</th>
+                            <th>Data de Entrada</th>
+                            <th>Data de Saída</th>
+                            <th>Ambiente</th>
+                            <th>Necessidade Especial</th>  
+                            <th>Situação</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for reserva in reservas %}
+                            <tr>
+                                <td>
+                                  <a href="{% url 'update_reserva' reserva.id %}">
+                                    {{ reserva.associado.nome }}
+                                  </a>
+                                </td>
+                                <td>{{reserva.dataAgendamento}}</td>
+                                <td>{{reserva.dateEntrada}}</td>
+                                <td>{{reserva.dateSaida}}</td>
+                                <td>{{reserva.ambiente}}</td>
+                                <td>{{reserva.necessidade}}</td>
+                                <td>{{reserva.situacao}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                        </tbody>
+                    </table>
+                  </div>
+                </div>        
+                <a class="nav-link" href="{% url 'create_reserva' %}">
+                  <i class="fa fa-bed"></i>
+                  <span class="nav-link-text">Nova Reserva</span>
+                </a>        
+              </div>
+            </div>
+        {% else %}
+            <div>
+              <meta http-equiv="refresh" content=1;url="{% url 'login' %}">
+            </div>  
+        {% endif %}
+        {% endblock %}

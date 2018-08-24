@@ -1,0 +1,16 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content-wrapper %}
+{% if user.is_authenticated %}
+<div>
+  <meta http-equiv="refresh" content=1;url="{% url 'list_reservas' %}">
+</div> 
+{% else %}
+<div>
+  <meta http-equiv="refresh" content=1;url="{% url 'login' %}">
+</div>  
+{% endif %}
+{% endblock %}
